@@ -1,25 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { em, MantineProvider } from '@mantine/core';
+import { ApolloProvider } from '@apollo/client';
+import { client } from './GraphQl/client';
+import { Route, Routes } from 'react-router-dom';
+import { Search } from './Search/Search';
+import { Issues } from './Issues/Issues';
+
+const theme = {
+  colorScheme: 'light',
+  primaryColor: 'blue',
+  breakpoints: {
+    xs: em(375),
+  }
+};
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <MantineProvider theme={theme}>
+      <div className="App">
+        <header className="App-header">
+          Github Issues Viewer
+        </header>
+        <main>
+          <ApolloProvider client={client}>
+            <Routes>
+              <Route path="/" element={<Search />} />
+              <Route path="/issues" element={<Issues />} />
+            </Routes>
+          </ApolloProvider>
+        </main>
+      </div>
+    </MantineProvider>
   );
 }
 
