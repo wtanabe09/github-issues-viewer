@@ -24,8 +24,11 @@ export const GET_MY_REPOSITORIES = gql`
 `;
 
 export const GET_PUBLIC_REPOSITORIES = gql`
-  query GetPublicRepositories($searchWord: String!) {
-    search(query: $searchWord, type: REPOSITORY, first: 10) {
+  query GetPublicRepositories($searchWord: String!, $prevCursor: String) {
+    search(query: $searchWord, type: REPOSITORY, first: 10, after: $prevCursor) {
+      pageInfo {
+        endCursor
+      }
       nodes {
         ... on Repository {
           nameWithOwner

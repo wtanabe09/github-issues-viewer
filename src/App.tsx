@@ -1,10 +1,10 @@
 import './App.css';
 import { em, MantineProvider } from '@mantine/core';
-import { Search } from './Search/Search';
-import { Route, Routes } from 'react-router-dom';
-import { Issues } from './Issues/Issues';
 import { ApolloProvider } from '@apollo/client';
 import { client } from './GraphQl/client';
+import { Route, Routes } from 'react-router-dom';
+import { Search } from './Search/Search';
+import { Issues } from './Issues/Issues';
 
 const theme = {
   colorScheme: 'light',
