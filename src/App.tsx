@@ -1,7 +1,10 @@
 import './App.css';
 import { em, MantineProvider } from '@mantine/core';
-import { SearchBox } from './Search/SearchBox';
 import { Search } from './Search/Search';
+import { Route, Routes } from 'react-router-dom';
+import { Issues } from './Issues/Issues';
+import { ApolloProvider } from '@apollo/client';
+import { client } from './GraphQl/client';
 
 const theme = {
   colorScheme: 'light',
@@ -19,7 +22,12 @@ function App() {
           Github Issues Viewer
         </header>
         <main>
-          <Search />
+          <ApolloProvider client={client}>
+            <Routes>
+              <Route path="/" element={<Search />} />
+              <Route path="/issues" element={<Issues />} />
+            </Routes>
+          </ApolloProvider>
         </main>
       </div>
     </MantineProvider>

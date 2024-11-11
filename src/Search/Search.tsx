@@ -7,7 +7,7 @@ export const Search:React.FC = () => {
 
   return (
     <div>
-      <SearchBox searchResults={searchResults} setSearchResults={setSearchResults} />
+      <SearchBox setSearchResults={setSearchResults} />
       <SearchResult searchResults={searchResults} />
     </div>
   )
