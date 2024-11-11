@@ -4,22 +4,26 @@ import { GET_PUBLIC_REPOSITORIES } from "../GraphQl/querys";
 import { useQuery } from "@apollo/client";
 
 interface SearchBoxProps {
+  searchWord: string;
+  setSearchWord: React.Dispatch<React.SetStateAction<string>>;
   setSearchResults: React.Dispatch<React.SetStateAction<string[]>>;
+  setPrevEndCursor: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
-export const SearchBox:React.FC<SearchBoxProps> = ({ setSearchResults }) => {
-  const [searchValue, setSearchValue] = useState('');
+export const SearchBox:React.FC<SearchBoxProps> = ({ searchWord, setSearchWord, setSearchResults, setPrevEndCursor }) => {
   const { loading, error, data } = useQuery(GET_PUBLIC_REPOSITORIES, {
-    variables: {searchWord: searchValue}
+    variables: {searchWord: searchWord, prevCursor: null}
   });
 
   const searchHandler = () => {
     // テストのために、searchReasultsにsearchValueを追加する
-    if (!searchValue) return;
+    if (!searchWord) return;
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error : {error.message} </p>;
     if (data) {
+      console.log(data);
       setSearchResults(data.search.nodes.map((node: any) => node.nameWithOwner));
+      setPrevEndCursor(data.search.pageInfo.endCursor);
     }
   }
 
@@ -32,16 +36,17 @@ export const SearchBox:React.FC<SearchBoxProps> = ({ setSearchResults }) => {
       >
         <TextInput
           placeholder="Search"
-          value={searchValue}
-          onChange={(event) => setSearchValue(event.currentTarget.value)}
+          value={searchWord}
+          onChange={(event) => setSearchWord(event.currentTarget.value)}
           rightSection={
             <CloseButton
               aria-label="Clear search"
               onClick={() => {
-                setSearchValue('');
+                setSearchWord('');
                 setSearchResults([]);
+                setPrevEndCursor(null);
               }}
-              style={{ display: searchValue ? 'block' : 'none' }}
+              style={{ display: searchWord ? 'block' : 'none' }}
             />
           }
         />
