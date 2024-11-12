@@ -21,7 +21,6 @@ export const SearchBox:React.FC<SearchBoxProps> = ({ searchWord, setSearchWord, 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error : {error.message} </p>;
     if (data) {
-      console.log(data);
       setSearchResults(data.search.nodes.map((node: any) => node.nameWithOwner));
       setPrevEndCursor(data.search.pageInfo.endCursor);
     }
