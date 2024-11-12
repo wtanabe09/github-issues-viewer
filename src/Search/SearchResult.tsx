@@ -1,4 +1,4 @@
-import { Button } from "@mantine/core";
+import { ScrollArea, NavLink } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
 
 interface SearchResultProps {
@@ -13,19 +13,15 @@ export const SearchResult:React.FC<SearchResultProps> = ({searchResults}) => {
 
   return (
     <div>
-      <h2>Search Results</h2>
-      <ul>
-        {searchResults && searchResults.map((result, index) => (
-          <li key={index}>
-            <Button
-              fullWidth
-              variant="outline"
-              onClick={(event) => handleViewIssues(result)}>
-              {result}
-            </Button>
-          </li>
-        ))}
-      </ul>
+      <ScrollArea h={500}>
+        <ul>
+          {searchResults && searchResults.map((result, index) => (
+            <li key={index}>
+              <NavLink label={result} onClick={(event) => handleViewIssues(result)} />
+            </li>
+          ))}
+        </ul>
+      </ScrollArea>
     </div>
   )
 }
