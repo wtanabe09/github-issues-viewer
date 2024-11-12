@@ -16,7 +16,6 @@ export const LoadMoreButton:React.FC<LoadMoreButtonProps> = ({searchWord, setSea
   
   const handleLoadMore = () => {
     if (data) {
-      console.log(data);
       setSearchResults((prev) => [...prev, ...data.search.nodes.map((node: any) => node.nameWithOwner)]);
       setPrevEndCursor(data.search.pageInfo.endCursor);
     }    
@@ -24,7 +23,7 @@ export const LoadMoreButton:React.FC<LoadMoreButtonProps> = ({searchWord, setSea
   }
   return (
     <div>
-      <Button onClick={(event) => handleLoadMore()}>Load More</Button>
+      <Button color="gray" variant="outline" onClick={(event) => handleLoadMore()}>Load More</Button>
     </div>
   )
 }

@@ -1,5 +1,5 @@
 import './App.css';
-import { em, MantineProvider } from '@mantine/core';
+import { em, MantineProvider, Title } from '@mantine/core';
 import { ApolloProvider } from '@apollo/client';
 import { client } from './GraphQl/client';
 import { Route, Routes } from 'react-router-dom';
@@ -19,7 +19,7 @@ function App() {
     <MantineProvider theme={theme}>
       <div className="App">
         <header className="App-header">
-          Github Issues Viewer
+          <Title mx={'sm'} order={1}>Github Issues Viewer</Title>
         </header>
         <main>
           <ApolloProvider client={client}>
