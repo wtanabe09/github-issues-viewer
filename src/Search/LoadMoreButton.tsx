@@ -23,7 +23,7 @@ export const LoadMoreButton:React.FC<LoadMoreButtonProps> = ({searchWord, setSea
   }
   return (
     <div>
-      <Button onClick={(event) => handleLoadMore()}>Load More</Button>
+      <Button color="gray" variant="outline" onClick={(event) => handleLoadMore()}>Load More</Button>
     </div>
   )
 }
