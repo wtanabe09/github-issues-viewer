@@ -1,5 +1,6 @@
-import { ScrollArea, NavLink } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
+import { ScrollArea, NavLink } from "@mantine/core";
+import { IconChevronRight } from "@tabler/icons-react";
 
 interface SearchResultProps {
   searchResults: string[];
@@ -13,14 +14,16 @@ export const SearchResult:React.FC<SearchResultProps> = ({searchResults}) => {
 
   return (
     <div>
-      <ScrollArea h={500}>
-        <ul>
-          {searchResults && searchResults.map((result, index) => (
-            <li key={index}>
-              <NavLink label={result} onClick={(event) => handleViewIssues(result)} />
-            </li>
-          ))}
-        </ul>
+      <ScrollArea my={'lg'} h={500}>
+        {searchResults && searchResults.map((result, index) => (
+          <NavLink
+            label={result}
+            onClick={(event) => handleViewIssues(result)}
+            rightSection={
+              <IconChevronRight size="0.8rem" stroke={1.5} className="mantine-rotate-rtl" />
+            }
+          />
+        ))}
       </ScrollArea>
     </div>
   )

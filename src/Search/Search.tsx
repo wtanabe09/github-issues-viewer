@@ -10,7 +10,7 @@ export const Search:React.FC = () => {
   const [prevEndCursor, setPrevEndCursor] = useState<string | null>(null);
 
   return (
-    <Container>
+    <Container my={'xl'}>
       <SearchBox searchWord={searchWord} setSearchWord={setSearchWord} setSearchResults={setSearchResults} setPrevEndCursor={setPrevEndCursor} />
       <SearchResult searchResults={searchResults} />
       {prevEndCursor &&

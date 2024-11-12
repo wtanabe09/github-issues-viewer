@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, CloseButton, Flex, TextInput } from "@mantine/core";
+import { Button, CloseButton, Container, Flex, Grid, Group, TextInput } from "@mantine/core";
 import { GET_PUBLIC_REPOSITORIES } from "../GraphQl/querys";
 import { useQuery } from "@apollo/client";
 
@@ -28,29 +28,29 @@ export const SearchBox:React.FC<SearchBoxProps> = ({ searchWord, setSearchWord, 
 
   return (
     <div>
-      <Flex
-        direction={{ xs: 'row' }}
-        gap={{ xs: 'xs' }}
-        justify={{ xs: 'center' }}
-      >
-        <TextInput
-          placeholder="Search"
-          value={searchWord}
-          onChange={(event) => setSearchWord(event.currentTarget.value)}
-          rightSection={
-            <CloseButton
-              aria-label="Clear search"
-              onClick={() => {
-                setSearchWord('');
-                setSearchResults([]);
-                setPrevEndCursor(null);
-              }}
-              style={{ display: searchWord ? 'block' : 'none' }}
-            />
-          }
-        />
-        <Button onClick={() => {searchHandler()}}>Search</Button>
-      </Flex>
+      <Grid justify="center" gutter={1} grow>
+        <Grid.Col span={10}>
+          <TextInput
+            placeholder="Search repository"
+            value={searchWord}
+            onChange={(event) => setSearchWord(event.currentTarget.value)}
+            rightSection={
+              <CloseButton
+                aria-label="Clear search"
+                onClick={() => {
+                  setSearchWord('');
+                  setSearchResults([]);
+                  setPrevEndCursor(null);
+                }}
+                style={{ display: searchWord ? 'block' : 'none' }}
+              />
+            }
+          />
+        </Grid.Col>
+        <Grid.Col span={2}>
+          <Button color="gray" variant="outline" onClick={() => {searchHandler()}}>Search</Button>
+        </Grid.Col>
+      </Grid>
     </div>
   )
 }
